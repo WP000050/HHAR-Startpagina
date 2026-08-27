@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HHAR Loginhelper | Heilig Hartschool Sint-Katelijne-Waver</title>
+<script src="https://unpkg.com/html5-qrcode"></script>
+<style>
+*{box-sizing:border-box}
+body{font-family:"Segoe UI",Arial,sans-serif;background:#eef3f8;margin:0;padding:20px}
+.container{position:relative;max-width:1100px;margin:auto;background:#fff;border-radius:20px;padding:30px;box-shadow:0 8px 25px rgba(35,55,105,.16);border-top:8px solid #2f4f8f}
+.logo-link{position:absolute;top:16px;left:22px;display:block;width:125px;text-align:center;text-decoration:none;color:#2f4f8f;font-weight:700;font-size:13px}
+.logo{display:block;max-width:125px;max-height:90px;width:auto;height:auto;margin:auto}
+.logo-fallback{display:none;padding:12px 8px;border:2px solid #2f4f8f;border-radius:12px;background:#fff}
+h1{text-align:center;color:#2f4f8f;margin-top:0;margin-bottom:25px;font-size:38px}
+.school-name{text-align:center;color:#52647c;margin:-15px 0 25px;font-weight:600}
+.scan-section{display:flex;justify-content:center;margin-bottom:30px}
+.inputblok{width:100%;max-width:600px;background:#f3f6ec;border:2px solid #a9b35c;border-radius:16px;padding:20px}
+input{width:100%;padding:16px;font-size:20px;border-radius:12px;border:2px solid #a9b35c;margin-bottom:10px}
+.button{width:100%;padding:14px;margin-top:8px;border:none;border-radius:12px;color:#fff;font-size:16px;font-weight:600;cursor:pointer;transition:all .2s}
+.button:hover{transform:translateY(-2px);opacity:.92}.scanbtn{background:#a9b35c;font-size:22px;padding:18px}
+#reader{margin-top:15px;border-radius:12px;overflow:hidden}.content-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px}
+.card{background:#f8fafc;border-radius:16px;padding:18px;box-shadow:0 4px 12px rgba(35,55,105,.10);border:1px solid #dfe7f2}
+.card h2{text-align:center;margin-top:0;margin-bottom:15px;color:#2f4f8f}.notice{padding:10px 12px;margin-bottom:10px;background:#fff8df;border:1px solid #e7c85d;border-radius:10px;color:#5e4b00;font-size:14px;text-align:center}
+.teams{background:#6264A7}.word{background:#2B579A}.ppt{background:#D24726}.onedrive{background:#0078D4}.outlook{background:#0072C6}
+.toolbox-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.l1{background:#4CAF50}.l2{background:#8BC34A}.l3{background:#FFC107;color:#111}.l4{background:#FF7043}.l5{background:#9C27B0}.l6{background:#3F51B5}.j4{background:#FF9800}.j5{background:#E91E63}
+@media(max-width:900px){.content-grid{grid-template-columns:1fr}h1{font-size:30px;margin-top:105px}.school-name{font-size:14px}.scanbtn{font-size:18px}.logo-link{width:140px;top:16px;left:50%;transform:translateX(-50%)}.logo{max-width:140px;max-height:85px}}
+</style>
+</head>
+<body>
+<div class="container">
+  <a class="logo-link" href="https://www.hhartschool-skw.be/" target="_blank" rel="noopener noreferrer" title="Website Heilig Hartschool Sint-Katelijne-Waver">
+    <!-- Plaats het aangeleverde logo naast dit HTML-bestand met bestandsnaam Logo_HHAR.png -->
+    <img class="logo" src="Logo_HHAR.png" alt="Logo Heilig Hartschool Sint-Katelijne-Waver" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <span class="logo-fallback">HEILIG HARTSCHOOL<br>SINT-KATELIJNE-WAVER</span>
+  </a>
+  <h1>🎓 Startpagina</h1>
+  <div class="school-name">Heilig Hartschool Sint-Katelijne-Waver</div>
+  <div class="scan-section"><div class="inputblok">
+    <input id="snummer" inputmode="numeric" autocomplete="off" placeholder="Typ S-nummer of scan QR-code">
+    <button class="button scanbtn" onclick="startScan()">📷 Scan QR-code</button>
+    <div id="reader"></div>
+  </div></div>
+  <div class="content-grid">
+    <div class="card"><h2>Microsoft 365</h2>
+      <button class="button teams" onclick="openApp('teams')">Teams</button>
+      <button class="button word" onclick="openApp('word')">Word</button>
+      <button class="button ppt" onclick="openApp('ppt')">PowerPoint</button>
+      <button class="button onedrive" onclick="openApp('onedrive')">OneDrive</button>
+      <button class="button outlook" onclick="openApp('outlook')">Outlook</button>
+    </div>
+    <div class="card"><h2>Toolboxen</h2>
+      <div class="notice">⚠️ De links naar de Toolboxen zijn tijdelijke placeholders en moeten later nog worden aangepast.</div>
+      <div class="toolbox-grid">
+        <button class="button l1" onclick="openToolbox('l1')">L1</button><button class="button l2" onclick="openToolbox('l2')">L2</button>
+        <button class="button l3" onclick="openToolbox('l3')">L3</button><button class="button l4" onclick="openToolbox('l4')">L4</button>
+        <button class="button l5" onclick="openToolbox('l5')">L5</button><button class="button l6" onclick="openToolbox('l6')">L6</button>
+        <button class="button j4" onclick="openToolbox('4J')">4J</button><button class="button j5" onclick="openToolbox('5J')">5J</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+const LEERLING_DOMEIN = "leerling.hh-skw.be";
+let scanner = null;
+window.addEventListener("load",()=>document.getElementById("snummer").focus());
+document.getElementById("snummer").addEventListener("keydown",e=>{if(e.key==="Enter")openApp("teams")});
+function startScan(){
+  const reader=document.getElementById("reader"); reader.innerHTML="📷 Camera starten...";
+  const begin=()=>{scanner=new Html5Qrcode("reader");scanner.start({facingMode:"environment"},{fps:10,qrbox:220},decodedText=>{scanner.stop().then(()=>reader.innerHTML="").catch(()=>{});handleQR(decodedText)}).catch(()=>{reader.innerHTML="";alert("❌ Camera werkt niet. Controleer de cameratoestemming en gebruik HTTPS.")})};
+  if(scanner){scanner.stop().catch(()=>{}).finally(begin)}else begin();
+}
+function normaliseerGebruiker(raw){
+  let user=String(raw||"").trim().toLowerCase();
+  if(user.includes("login_hint=")){
+    try{const url=new URL(user);user=decodeURIComponent(url.searchParams.get("login_hint")||"").trim().toLowerCase()}
+    catch(e){const m=user.match(/[?&]login_hint=([^&]+)/i);user=m?decodeURIComponent(m[1]).trim().toLowerCase():""}
+  }else user=user.replace(/\s/g,"");
+  if(/^\d{6}$/.test(user)) return `s${user}@${LEERLING_DOMEIN}`;
+  if(/^s\d{6}$/.test(user)) return `${user}@${LEERLING_DOMEIN}`;
+  const zonderS=user.match(new RegExp(`^(\\d{6})@${LEERLING_DOMEIN.replace(/\./g,"\\.")}$`));
+  if(zonderS) return `s${zonderS[1]}@${LEERLING_DOMEIN}`;
+  if(new RegExp(`^s\\d{6}@${LEERLING_DOMEIN.replace(/\./g,"\\.")}$`).test(user)) return user;
+  return null;
+}
+function handleQR(data){const user=normaliseerGebruiker(data);if(user){document.getElementById("snummer").value=user;goToTeams(user)}else alert("❌ QR-code niet herkend. Verwacht formaat: s123456@"+LEERLING_DOMEIN)}
+function getUserFromInput(){const input=document.getElementById("snummer");if(!input.value.trim()){alert("⚠️ Typ een S-nummer of scan een QR-code.");return null}const user=normaliseerGebruiker(input.value);if(!user){alert("⚠️ Ongeldig nummer. Gebruik 123456, s123456 of s123456@"+LEERLING_DOMEIN);return null}input.value=user;return user}
+function goToTeams(user){window.location.href="https://teams.microsoft.com/?login_hint="+encodeURIComponent(user)}
+function openApp(app){const user=getUserFromInput();if(!user)return;const hint=encodeURIComponent(user);const urls={word:"https://www.office.com/launch/word?auth=2&login_hint="+hint,ppt:"https://www.office.com/launch/powerpoint?auth=2&login_hint="+hint,onedrive:"https://www.office.com/launch/onedrive?auth=2&login_hint="+hint,outlook:"https://outlook.office.com/mail/?login_hint="+hint};if(app==="teams")return goToTeams(user);window.location.href=urls[app]}
+function openToolbox(k){
+  // TODO HHAR: VERVANG LATER elke lege waarde hieronder door de definitieve Toolbox-URL.
+  const links={l1:"",l2:"",l3:"",l4:"",l5:"",l6:"","4J":"","5J":""};
+  if(!links[k]){alert(`⚠️ De link voor Toolbox ${k} is nog niet ingesteld. Pas deze later aan in openToolbox().`);return}
+  window.location.href=links[k];
+}
+</script>
+</body>
+</html>
