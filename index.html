@@ -1,34 +1,131 @@
 <!DOCTYPE html>
-<html lang='nl'>
+<html lang="nl">
 <head>
-<meta charset='UTF-8'>
-<meta name='viewport' content='width=device-width,initial-scale=1.0'>
-<title>HHAR Startpagina</title>
-<style>
-:root{--heart-red:#b93643;--heart-red-dark:#8f2330;--warm:#fffdf9;--cream:#f8f3ea;--line:#eadfd5;--radius:24px}
-*{box-sizing:border-box}body{margin:0;padding:10px;font-family:Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,var(--warm),var(--cream))}
-.page-shell{max-width:1400px;margin:auto;background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.08)}
-.hero{min-height:170px;padding:20px 30px;color:#fff;background:linear-gradient(115deg,rgba(112,22,35,.93),rgba(185,54,67,.78))}
-.topbar{display:flex;justify-content:space-between;align-items:center}.brand{display:flex;gap:12px;align-items:center;color:#fff;text-decoration:none}.logo{max-height:70px}
-h1{margin:0;font-size:clamp(28px,4vw,42px)}.hero-copy{margin-top:15px}.hero-copy p{font-size:16px;margin-top:8px}
-main{padding:20px 24px}.login-panel{max-width:760px;margin:-35px auto 20px;padding:20px;border:1px solid var(--line);border-radius:var(--radius);background:#fff}
-.input-row{display:grid;grid-template-columns:1fr auto;gap:12px}input{padding:15px;border-radius:12px;border:2px solid #decfc4;font-size:18px}.scan-button{padding:0 18px;background:var(--heart-red);color:#fff;border:0;border-radius:12px}
-.content-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.card{padding:18px;border:1px solid var(--line);border-radius:var(--radius)}
-.app-grid,.toolbox-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.btn{min-height:58px;border:0;border-radius:14px;color:#fff;font-weight:700}.teams{background:#6264a7}.word{background:#2b579a}.ppt{background:#d24726}.onedrive{background:#0078d4}.outlook{background:#0072c6}.l1{background:#5f9f45}.l2{background:#78ad46}.l3{background:#d8ad29}.l4{background:#ed8734}.l5{background:#d3624e}.l6{background:#a54661}.j4{background:#75509b}.j5{background:#ba477a}
-@media(max-width:850px){.content-grid{grid-template-columns:1fr}.input-row{grid-template-columns:1fr}.app-grid,.toolbox-grid{grid-template-columns:1fr}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#b93643">
+  <title>Startpagina | Heilig Hartschool Sint-Katelijne-Waver</title>
+  <script src="https://unpkg.com/html5-qrcode" defer></script>
+  <style>
+    :root{--red:#b93643;--red-dark:#8f2330;--cream:#f8f3ea;--white:#fffdf9;--ink:#353535;--muted:#6c6c6c;--line:#eadfd5;--radius:19px;--shadow:0 12px 32px rgba(74,48,39,.13)}
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;font-family:"Segoe UI",Arial,sans-serif;color:var(--ink)}
+    body{padding:10px;background:radial-gradient(circle at 8% 8%,rgba(243,201,79,.18),transparent 24%),radial-gradient(circle at 92% 18%,rgba(124,163,92,.16),transparent 24%),linear-gradient(180deg,var(--white),var(--cream))}
+    button,input{font:inherit}.page-shell{width:min(1400px,100%);margin:auto;overflow:hidden;background:rgba(255,255,255,.97);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow)}
+    .hero{position:relative;min-height:165px;padding:17px 26px 24px;color:#fff;background:linear-gradient(115deg,rgba(112,22,35,.94),rgba(185,54,67,.80)),url("schoolfoto.jpg") center/cover no-repeat;isolation:isolate}
+    .hero:after{content:"";position:absolute;z-index:-1;right:-70px;bottom:-185px;width:300px;height:300px;border:45px solid rgba(255,255,255,.09);border-radius:50%}
+    .topbar,.brand{display:flex;align-items:center}.topbar{justify-content:space-between;gap:16px}.brand{gap:12px;color:#fff;text-decoration:none}.logo-frame{width:95px;height:70px;display:grid;place-items:center;overflow:hidden;padding:6px;border-radius:14px;background:#fff;box-shadow:0 6px 18px rgba(55,14,19,.23)}
+    .logo{display:block;max-width:100%;max-height:100%;object-fit:contain}.logo-fallback{display:none;color:var(--red);font-size:11px;line-height:1.15;text-align:center;font-weight:900}.brand-text strong{display:block;font-size:18px}.brand-text span{display:block;margin-top:2px;font-size:13px;color:rgba(255,255,255,.85)}
+    .website-link{padding:9px 13px;border:1px solid rgba(255,255,255,.45);border-radius:999px;color:#fff;background:rgba(255,255,255,.12);text-decoration:none;font-size:13px;font-weight:700}.hero-copy{margin-top:12px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#fff5c9}.hero h1{margin:3px 0 0;font-size:clamp(27px,3.1vw,42px);line-height:1}.hero-copy p{margin:7px 0 0;font-size:15px;color:rgba(255,255,255,.92)}
+    main{padding:16px 22px 17px}.login-panel{position:relative;z-index:2;max-width:840px;margin:-34px auto 15px;padding:15px 17px;border:1px solid var(--line);border-radius:var(--radius);background:#fff;box-shadow:0 12px 28px rgba(83,47,39,.14)}
+    .login-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:9px}.login-top h2{margin:0;color:var(--red-dark);font-size:21px}.login-top p{margin:2px 0 0;color:var(--muted);font-size:12px}.heart{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;color:#fff;background:var(--red);font-size:20px}
+    .input-row{display:grid;grid-template-columns:1fr auto;gap:10px}#snummer{width:100%;min-height:48px;padding:10px 14px;border:2px solid #decfc4;border-radius:13px;outline:none;background:#fffcf8;font-size:17px}#snummer:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(185,54,67,.11)}
+    .scan-button{min-height:48px;padding:0 18px;border:0;border-radius:13px;color:#fff;background:var(--red);cursor:pointer;font-weight:800}.scan-button:hover{background:var(--red-dark)}.scan-button:disabled{opacity:.6;cursor:wait}.input-help{margin:7px 2px 0;color:var(--muted);font-size:11px}#reader{width:100%;margin-top:10px;overflow:hidden;border-radius:13px}.scanner-actions{display:none;margin-top:8px;text-align:center}.stop-button{padding:7px 15px;border:0;border-radius:10px;color:#fff;background:#666;cursor:pointer}
+    .content-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{padding:15px;border:1px solid var(--line);border-radius:var(--radius);background:#fff;box-shadow:0 7px 19px rgba(80,52,38,.07)}.card-header{display:flex;align-items:center;gap:10px;margin-bottom:11px}.card-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;color:#fff;background:var(--red);font-size:18px}.card h2{margin:0;color:var(--red-dark);font-size:21px}.card-subtitle{margin:1px 0 0;color:var(--muted);font-size:12px}
+    .app-grid,.toolbox-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.app-button,.toolbox-button{position:relative;min-height:47px;display:flex;align-items:center;gap:9px;padding:9px 13px;border:0;border-radius:13px;color:#fff;cursor:pointer;font-weight:800;box-shadow:0 5px 12px rgba(46,38,35,.12)}.app-button:after,.toolbox-button:after{content:"›";position:absolute;right:12px;font-size:21px;opacity:.72}.app-button:hover,.toolbox-button:hover{filter:brightness(1.07);transform:translateY(-1px)}.app-symbol{width:27px;height:27px;display:grid;place-items:center;border-radius:8px;background:rgba(255,255,255,.18);font-size:14px}
+    .teams{background:#6264a7}.word{background:#2b579a}.powerpoint{background:#d24726}.onedrive{background:#0078d4}.outlook{background:#0072c6;grid-column:1/-1}.toolbox-notice{margin-bottom:9px;padding:7px 10px;border:1px solid #ead17c;border-radius:10px;color:#6a5210;background:#fff8dc;font-size:11px}.toolbox-button{min-height:42px;justify-content:center;padding-right:31px;font-size:15px}.l1{background:#5f9f45}.l2{background:#78ad46}.l3{background:#d8ad29}.l4{background:#ed8734}.l5{background:#d3624e}.l6{background:#a54661}.j4{background:#75509b}.j5{background:#ba477a}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @media(max-width:850px){body{padding:0}.page-shell{border:0;border-radius:0}.hero{min-height:190px;padding:15px 18px 48px}.website-link{display:none}.brand-text strong{font-size:15px}.logo-frame{width:78px;height:60px}.hero-copy{margin-top:15px}main{padding:14px}.login-panel{margin:-38px auto 13px}.content-grid{grid-template-columns:1fr}.card{padding:14px}}
+    @media(max-width:560px){.brand-text span{font-size:11px}.input-row{grid-template-columns:1fr}.scan-button{width:100%}.app-grid{grid-template-columns:1fr}.outlook{grid-column:auto}}
+    @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+  </style>
 </head>
 <body>
-<div class='page-shell'>
-<header class='hero'>
-<div class='topbar'><a class='brand' href='https://www.hhartschool-skw.be/'><img class='logo' src='Logo_HHAR.png'><strong>Heilig Hartschool Sint-Katelijne-Waver</strong></a></div>
-<div class='hero-copy'><h1>Jouw digitale startpagina</h1><p>Scan je QR-code of typ je S-nummer.</p></div>
-</header>
-<main>
-<section class='login-panel'><div class='input-row'><input id='snummer' placeholder='s123456'><button class='scan-button'>📷 Scan QR-code</button></div></section>
-<div class='content-grid'>
-<div class='card'><h2>Microsoft 365</h2><div class='app-grid'><button class='btn teams'>Teams</button><button class='btn word'>Word</button><button class='btn ppt'>PowerPoint</button><button class='btn onedrive'>OneDrive</button><button class='btn outlook'>Outlook</button></div></div>
-<div class='card'><h2>Toolboxen</h2><div class='toolbox-grid'><button class='btn l1'>L1</button><button class='btn l2'>L2</button><button class='btn l3'>L3</button><button class='btn l4'>L4</button><button class='btn l5'>L5</button><button class='btn l6'>L6</button><button class='btn j4'>4J</button><button class='btn j5'>5J</button></div></div>
+<div class="page-shell">
+  <header class="hero">
+    <div class="topbar">
+      <a class="brand" href="https://www.hhartschool-skw.be/" target="_blank" rel="noopener noreferrer">
+        <span class="logo-frame"><img class="logo" src="Logo_HHAR.png" alt="Logo Heilig Hartschool Sint-Katelijne-Waver" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="logo-fallback">HEILIG<br>HARTSCHOOL</span></span>
+        <span class="brand-text"><strong>Heilig Hartschool</strong><span>Sint-Katelijne-Waver</span></span>
+      </a>
+      <a class="website-link" href="https://www.hhartschool-skw.be/" target="_blank" rel="noopener noreferrer">♥ Schoolwebsite</a>
+    </div>
+    <div class="hero-copy"><div class="eyebrow">♥ Een school met een hart voor je kind</div><h1>Jouw digitale startpagina</h1><p>Scan je persoonlijke QR-code of typ je S-nummer.</p></div>
+  </header>
+  <main>
+    <section class="login-panel" aria-labelledby="login-title">
+      <div class="login-top"><div><h2 id="login-title">Aanmelden</h2><p>Gebruik je leerlingnummer om met het juiste schoolaccount verder te gaan.</p></div><div class="heart" aria-hidden="true">♥</div></div>
+      <label class="sr-only" for="snummer">S-nummer</label>
+      <div class="input-row"><input id="snummer" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Bijvoorbeeld: s123456"><button id="scanButton" class="scan-button" type="button">📷 Scan QR-code</button></div>
+      <p class="input-help">Je mag 123456, s123456 of je volledige schooladres invoeren.</p>
+      <div id="reader" aria-live="polite"></div><div id="scannerActions" class="scanner-actions"><button id="stopButton" class="stop-button" type="button">Scanner stoppen</button></div>
+    </section>
+    <div class="content-grid">
+      <section class="card"><div class="card-header"><div class="card-icon">M</div><div><h2>Microsoft 365</h2><p class="card-subtitle">Open een toepassing met je schoolaccount</p></div></div>
+        <div class="app-grid"><button class="app-button teams" data-app="teams"><span class="app-symbol">T</span><span>Teams</span></button><button class="app-button word" data-app="word"><span class="app-symbol">W</span><span>Word</span></button><button class="app-button powerpoint" data-app="ppt"><span class="app-symbol">P</span><span>PowerPoint</span></button><button class="app-button onedrive" data-app="onedrive"><span class="app-symbol">☁</span><span>OneDrive</span></button><button class="app-button outlook" data-app="outlook"><span class="app-symbol">O</span><span>Outlook</span></button></div>
+      </section>
+      <section class="card"><div class="card-header"><div class="card-icon">★</div><div><h2>Toolboxen</h2><p class="card-subtitle">Kies je leerjaar of klasgroep</p></div></div>
+        <div class="toolbox-notice">⚠️ De Toolboxlinks zijn nog niet ingesteld. Vul ze later in bij <strong>TOOLBOX_LINKS</strong> onderaan de code.</div>
+        <div class="toolbox-grid"><button class="toolbox-button l1" data-toolbox="l1">L1</button><button class="toolbox-button l2" data-toolbox="l2">L2</button><button class="toolbox-button l3" data-toolbox="l3">L3</button><button class="toolbox-button l4" data-toolbox="l4">L4</button><button class="toolbox-button l5" data-toolbox="l5">L5</button><button class="toolbox-button l6" data-toolbox="l6">L6</button><button class="toolbox-button j4" data-toolbox="4J">4J</button><button class="toolbox-button j5" data-toolbox="5J">5J</button></div>
+      </section>
+    </div>
+  </main>
 </div>
-</main></div>
-</body></html>
+<script>
+  const LEERLING_DOMEIN = "leerling.hh-skw.be";
+  const TOOLBOX_LINKS = {l1:"",l2:"",l3:"",l4:"",l5:"",l6:"","4J":"","5J":""};
+  let scanner = null;
+  let scannerActief = false;
+
+  document.addEventListener("DOMContentLoaded", function(){
+    const input=document.getElementById("snummer");
+    input.focus();
+    input.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();openApp("teams");}});
+    document.getElementById("scanButton").addEventListener("click",startScan);
+    document.getElementById("stopButton").addEventListener("click",stopScanner);
+    document.querySelectorAll("[data-app]").forEach(b=>b.addEventListener("click",()=>openApp(b.dataset.app)));
+    document.querySelectorAll("[data-toolbox]").forEach(b=>b.addEventListener("click",()=>openToolbox(b.dataset.toolbox)));
+  });
+
+  async function startScan(){
+    const reader=document.getElementById("reader");
+    const scanButton=document.getElementById("scanButton");
+    if(scannerActief)return;
+    if(typeof Html5Qrcode==="undefined"){
+      alert("❌ De QR-scanner kon niet worden geladen. Controleer de internetverbinding en herlaad de pagina.");
+      return;
+    }
+    scanButton.disabled=true; reader.textContent="📷 Camera starten...";
+    try{
+      scanner=new Html5Qrcode("reader");
+      await scanner.start({facingMode:"environment"},{fps:10,qrbox:{width:220,height:220}},async decodedText=>{await stopScanner();handleQR(decodedText);},()=>{});
+      scannerActief=true;
+      document.getElementById("scannerActions").style.display="block";
+    }catch(error){
+      scanner=null; scannerActief=false; reader.innerHTML="";
+      alert("❌ De camera kon niet worden gestart. Sta cameragebruik toe en open de website via HTTPS.");
+    }finally{scanButton.disabled=false;}
+  }
+
+  async function stopScanner(){
+    if(!scanner){scannerActief=false;return;}
+    try{if(scannerActief)await scanner.stop();}catch(e){}
+    try{scanner.clear();}catch(e){}
+    scanner=null; scannerActief=false;
+    document.getElementById("reader").innerHTML="";
+    document.getElementById("scannerActions").style.display="none";
+  }
+
+  function normaliseerGebruiker(raw){
+    let user=String(raw||"").trim().toLowerCase();
+    if(user.includes("login_hint=")){
+      try{const url=new URL(user);user=decodeURIComponent(url.searchParams.get("login_hint")||"").trim().toLowerCase();}
+      catch(e){const m=user.match(/[?&]login_hint=([^&]+)/i);user=m?decodeURIComponent(m[1]).trim().toLowerCase():"";}
+    }else{user=user.replace(/\s/g,"");}
+    if(/^\d{6}$/.test(user))return "s"+user+"@"+LEERLING_DOMEIN;
+    if(/^s\d{6}$/.test(user))return user+"@"+LEERLING_DOMEIN;
+    const escaped=LEERLING_DOMEIN.replace(/\./g,"\\.");
+    const zonderS=user.match(new RegExp("^(\\d{6})@"+escaped+"$"));
+    if(zonderS)return "s"+zonderS[1]+"@"+LEERLING_DOMEIN;
+    if(new RegExp("^s\\d{6}@"+escaped+"$").test(user))return user;
+    return null;
+  }
+
+  function handleQR(data){const user=normaliseerGebruiker(data);if(!user){alert("❌ QR-code niet herkend. Verwacht formaat: s123456@"+LEERLING_DOMEIN);return;}document.getElementById("snummer").value=user;goToTeams(user);}
+  function getUserFromInput(){const input=document.getElementById("snummer");if(!input.value.trim()){alert("⚠️ Typ een S-nummer of scan een QR-code.");input.focus();return null;}const user=normaliseerGebruiker(input.value);if(!user){alert("⚠️ Ongeldig nummer. Gebruik 123456, s123456 of s123456@"+LEERLING_DOMEIN);input.focus();input.select();return null;}input.value=user;return user;}
+  function goToTeams(user){window.location.href="https://teams.microsoft.com/?login_hint="+encodeURIComponent(user);}
+  function openApp(app){const user=getUserFromInput();if(!user)return;const hint=encodeURIComponent(user);const urls={word:"https://www.office.com/launch/word?auth=2&login_hint="+hint,ppt:"https://www.office.com/launch/powerpoint?auth=2&login_hint="+hint,onedrive:"https://www.office.com/launch/onedrive?auth=2&login_hint="+hint,outlook:"https://outlook.office.com/mail/?login_hint="+hint};if(app==="teams"){goToTeams(user);return;}if(urls[app])window.location.href=urls[app];}
+  function openToolbox(k){const url=TOOLBOX_LINKS[k];if(!url){alert("⚠️ De link voor Toolbox "+k+" is nog niet ingesteld.");return;}window.location.href=url;}
+</script>
+</body>
+</html>
