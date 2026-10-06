@@ -8,8 +8,8 @@
   <title>Startpagina | Heilig Hartschool Sint-Katelijne-Waver</title>
 
   <!--
-    De configuratie wordt eerst geladen.
     config.js moet in dezelfde map staan als index.html.
+    Dit bestand bevat het leerlingdomein en de toolboxlinks.
   -->
   <script src="config.js"></script>
 
@@ -54,7 +54,11 @@
           rgba(124, 163, 92, 0.16),
           transparent 24%
         ),
-        linear-gradient(180deg, var(--white), var(--cream));
+        linear-gradient(
+          180deg,
+          var(--white),
+          var(--cream)
+        );
     }
 
     button,
@@ -232,7 +236,7 @@
       height: 38px;
       display: grid;
       place-items: center;
-      flex: 0 0 auto;
+      flex-shrink: 0;
       border-radius: 12px;
       color: #fff;
       background: var(--red);
@@ -335,7 +339,7 @@
       height: 38px;
       display: grid;
       place-items: center;
-      flex: 0 0 auto;
+      flex-shrink: 0;
       border-radius: 12px;
       color: #fff;
       background: var(--red);
@@ -400,6 +404,7 @@
       height: 27px;
       display: grid;
       place-items: center;
+      flex-shrink: 0;
       border-radius: 8px;
       background: rgba(255, 255, 255, 0.18);
       font-size: 14px;
@@ -436,16 +441,16 @@
       font-size: 11px;
     }
 
-    .toolbox-notice.configured {
-      border-color: #bed7ae;
-      color: #315c25;
-      background: #f1faed;
+    .toolbox-notice.success {
+      border-color: #b8d7aa;
+      color: #315f25;
+      background: #f2faee;
     }
 
-    .toolbox-notice.config-error {
-      border-color: #e2a5a5;
-      color: #7a2424;
-      background: #fff0f0;
+    .toolbox-notice.error {
+      border-color: #e4abab;
+      color: #7d2626;
+      background: #fff2f2;
     }
 
     .toolbox-button {
@@ -455,14 +460,14 @@
       font-size: 15px;
     }
 
-    .toolbox-button.not-configured {
-      opacity: 0.58;
+    .toolbox-button.unavailable {
+      opacity: 0.55;
       filter: grayscale(0.35);
     }
 
-    .toolbox-button.not-configured:hover {
-      transform: none;
+    .toolbox-button.unavailable:hover {
       filter: grayscale(0.35);
+      transform: none;
     }
 
     .l1 {
@@ -626,4 +631,758 @@
       </div>
 
       <div class="hero-copy">
-        <div 
+        <div class="eyebrow">
+          ♥ Een school met een hart voor je kind
+        </div>
+
+        <h1>Jouw digitale startpagina</h1>
+
+        <p>
+          Scan je persoonlijke QR-code of typ je S-nummer.
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <section
+        class="login-panel"
+        aria-labelledby="login-title"
+      >
+        <div class="login-top">
+          <div>
+            <h2 id="login-title">Aanmelden</h2>
+
+            <p>
+              Gebruik je leerlingnummer om met het juiste
+              schoolaccount verder te gaan.
+            </p>
+          </div>
+
+          <div
+            class="heart"
+            aria-hidden="true"
+          >
+            ♥
+          </div>
+        </div>
+
+        <label
+          class="sr-only"
+          for="snummer"
+        >
+          S-nummer
+        </label>
+
+        <div class="input-row">
+          <input
+            id="snummer"
+            type="text"
+            autocomplete="off"
+            autocapitalize="none"
+            spellcheck="false"
+            placeholder="Bijvoorbeeld: s123456"
+          >
+
+          <button
+            id="scanButton"
+            class="scan-button"
+            type="button"
+          >
+            📷 Scan QR-code
+          </button>
+        </div>
+
+        <p class="input-help">
+          Je mag 123456, s123456 of je volledige schooladres invoeren.
+        </p>
+
+        <div
+          id="reader"
+          aria-live="polite"
+        ></div>
+
+        <div
+          id="scannerActions"
+          class="scanner-actions"
+        >
+          <button
+            id="stopButton"
+            class="stop-button"
+            type="button"
+          >
+            Scanner stoppen
+          </button>
+        </div>
+      </section>
+
+      <div class="content-grid">
+
+        <section class="card">
+          <div class="card-header">
+            <div
+              class="card-icon"
+              aria-hidden="true"
+            >
+              M
+            </div>
+
+            <div>
+              <h2>Microsoft 365</h2>
+
+              <p class="card-subtitle">
+                Open een toepassing met je schoolaccount
+              </p>
+            </div>
+          </div>
+
+          <div class="app-grid">
+            <button
+              class="app-button teams"
+              type="button"
+              data-app="teams"
+            >
+              <span class="app-symbol">T</span>
+              <span>Teams</span>
+            </button>
+
+            <button
+              class="app-button word"
+              type="button"
+              data-app="word"
+            >
+              <span class="app-symbol">W</span>
+              <span>Word</span>
+            </button>
+
+            <button
+              class="app-button powerpoint"
+              type="button"
+              data-app="ppt"
+            >
+              <span class="app-symbol">P</span>
+              <span>PowerPoint</span>
+            </button>
+
+            <button
+              class="app-button onedrive"
+              type="button"
+              data-app="onedrive"
+            >
+              <span class="app-symbol">☁</span>
+              <span>OneDrive</span>
+            </button>
+
+            <button
+              class="app-button outlook"
+              type="button"
+              data-app="outlook"
+            >
+              <span class="app-symbol">O</span>
+              <span>Outlook</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-header">
+            <div
+              class="card-icon"
+              aria-hidden="true"
+            >
+              ★
+            </div>
+
+            <div>
+              <h2>Toolboxen</h2>
+
+              <p class="card-subtitle">
+                Kies je leerjaar of klasgroep
+              </p>
+            </div>
+          </div>
+
+          <div
+            id="toolboxNotice"
+            class="toolbox-notice"
+            aria-live="polite"
+          >
+            De toolboxlinks worden geladen vanuit
+            <strong>config.js</strong>.
+          </div>
+
+          <div class="toolbox-grid">
+            <button
+              class="toolbox-button l1"
+              type="button"
+              data-toolbox="l1"
+            >
+              L1
+            </button>
+
+            <button
+              class="toolbox-button l2"
+              type="button"
+              data-toolbox="l2"
+            >
+              L2
+            </button>
+
+            <button
+              class="toolbox-button l3"
+              type="button"
+              data-toolbox="l3"
+            >
+              L3
+            </button>
+
+            <button
+              class="toolbox-button l4"
+              type="button"
+              data-toolbox="l4"
+            >
+              L4
+            </button>
+
+            <button
+              class="toolbox-button l5"
+              type="button"
+              data-toolbox="l5"
+            >
+              L5
+            </button>
+
+            <button
+              class="toolbox-button l6"
+              type="button"
+              data-toolbox="l6"
+            >
+              L6
+            </button>
+
+            <button
+              class="toolbox-button j4"
+              type="button"
+              data-toolbox="4J"
+            >
+              4J
+            </button>
+
+            <button
+              class="toolbox-button j5"
+              type="button"
+              data-toolbox="5J"
+            >
+              5J
+            </button>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    "use strict";
+
+    /*
+      CONFIGURATIE
+
+      Deze pagina ondersteunt in config.js beide schrijfwijzen:
+
+      window.CONFIG = { ... };
+
+      of:
+
+      const CONFIG = { ... };
+    */
+
+    const FALLBACK_CONFIG = {
+      LEERLING_DOMEIN: "leerling.hh-skw.be",
+
+      TOOLBOX_LINKS: {
+        l1: "",
+        l2: "",
+        l3: "",
+        l4: "",
+        l5: "",
+        l6: "",
+        "4J": "",
+        "5J": ""
+      }
+    };
+
+    /*
+      Controleer of CONFIG uit config.js beschikbaar is.
+
+      typeof CONFIG veroorzaakt geen fout wanneer CONFIG niet bestaat.
+    */
+    const ACTIEVE_CONFIG =
+      typeof CONFIG !== "undefined" &&
+      CONFIG &&
+      typeof CONFIG === "object"
+        ? CONFIG
+        : (
+            typeof window.CONFIG !== "undefined" &&
+            window.CONFIG &&
+            typeof window.CONFIG === "object"
+              ? window.CONFIG
+              : FALLBACK_CONFIG
+          );
+
+    const CONFIG_BESCHIKBAAR =
+      (
+        typeof CONFIG !== "undefined" &&
+        CONFIG &&
+        typeof CONFIG === "object"
+      ) ||
+      (
+        typeof window.CONFIG !== "undefined" &&
+        window.CONFIG &&
+        typeof window.CONFIG === "object"
+      );
+
+    const LEERLING_DOMEIN =
+      typeof ACTIEVE_CONFIG.LEERLING_DOMEIN === "string" &&
+      ACTIEVE_CONFIG.LEERLING_DOMEIN.trim() !== ""
+        ? ACTIEVE_CONFIG.LEERLING_DOMEIN
+            .trim()
+            .toLowerCase()
+        : FALLBACK_CONFIG.LEERLING_DOMEIN;
+
+    const TOOLBOX_LINKS =
+      ACTIEVE_CONFIG.TOOLBOX_LINKS &&
+      typeof ACTIEVE_CONFIG.TOOLBOX_LINKS === "object"
+        ? ACTIEVE_CONFIG.TOOLBOX_LINKS
+        : FALLBACK_CONFIG.TOOLBOX_LINKS;
+
+    let scanner = null;
+    let scannerActief = false;
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const input = document.getElementById("snummer");
+      const scanButton = document.getElementById("scanButton");
+      const stopButton = document.getElementById("stopButton");
+
+      controleerToolboxConfiguratie();
+
+      input.focus();
+
+      input.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          openApp("teams");
+        }
+      });
+
+      scanButton.addEventListener("click", startScan);
+      stopButton.addEventListener("click", stopScanner);
+
+      document
+        .querySelectorAll("[data-app]")
+        .forEach(function (button) {
+          button.addEventListener("click", function () {
+            openApp(button.dataset.app);
+          });
+        });
+
+      document
+        .querySelectorAll("[data-toolbox]")
+        .forEach(function (button) {
+          button.addEventListener("click", function () {
+            openToolbox(button.dataset.toolbox);
+          });
+        });
+    });
+
+    function controleerToolboxConfiguratie() {
+      const notice = document.getElementById("toolboxNotice");
+      const toolboxButtons =
+        document.querySelectorAll("[data-toolbox]");
+
+      let aantalIngesteld = 0;
+
+      toolboxButtons.forEach(function (button) {
+        const sleutel = button.dataset.toolbox;
+        const url = TOOLBOX_LINKS[sleutel];
+
+        if (isGeldigeUrl(url)) {
+          aantalIngesteld += 1;
+
+          button.classList.remove("unavailable");
+          button.removeAttribute("aria-disabled");
+          button.title = "";
+        } else {
+          button.classList.add("unavailable");
+          button.setAttribute("aria-disabled", "true");
+          button.title =
+            "Deze toolboxlink is nog niet ingesteld in config.js.";
+        }
+      });
+
+      notice.classList.remove("success", "error");
+
+      if (!CONFIG_BESCHIKBAAR) {
+        notice.classList.add("error");
+
+        notice.innerHTML =
+          "⚠️ <strong>config.js</strong> kon niet worden geladen. " +
+          "Controleer of config.js in dezelfde map staat als index.html.";
+
+        return;
+      }
+
+      if (aantalIngesteld === toolboxButtons.length) {
+        notice.classList.add("success");
+
+        notice.innerHTML =
+          "✅ Alle toolboxlinks zijn correct geladen.";
+
+        return;
+      }
+
+      if (aantalIngesteld === 0) {
+        notice.innerHTML =
+          "⚠️ De toolboxlinks zijn nog niet ingevuld in " +
+          "<strong>config.js</strong>.";
+
+        return;
+      }
+
+      notice.innerHTML =
+        "⚠️ " +
+        aantalIngesteld +
+        " van de " +
+        toolboxButtons.length +
+        " toolboxlinks zijn ingesteld in " +
+        "<strong>config.js</strong>.";
+    }
+
+    function isGeldigeUrl(url) {
+      if (
+        typeof url !== "string" ||
+        url.trim() === ""
+      ) {
+        return false;
+      }
+
+      try {
+        const gecontroleerdeUrl = new URL(url.trim());
+
+        return (
+          gecontroleerdeUrl.protocol === "https:" ||
+          gecontroleerdeUrl.protocol === "http:"
+        );
+      } catch (error) {
+        return false;
+      }
+    }
+
+    async function startScan() {
+      const reader = document.getElementById("reader");
+      const scanButton = document.getElementById("scanButton");
+
+      if (scannerActief) {
+        return;
+      }
+
+      if (typeof Html5Qrcode === "undefined") {
+        alert(
+          "❌ De QR-scanner kon niet worden geladen. " +
+          "Controleer de internetverbinding en herlaad de pagina."
+        );
+
+        return;
+      }
+
+      scanButton.disabled = true;
+      reader.textContent = "📷 Camera starten...";
+
+      try {
+        scanner = new Html5Qrcode("reader");
+
+        await scanner.start(
+          {
+            facingMode: "environment"
+          },
+          {
+            fps: 10,
+            qrbox: {
+              width: 220,
+              height: 220
+            }
+          },
+          async function (decodedText) {
+            await stopScanner();
+            handleQR(decodedText);
+          },
+          function () {
+            /*
+              Geen actie nodig wanneer een camerabeeld
+              nog geen geldige QR-code bevat.
+            */
+          }
+        );
+
+        scannerActief = true;
+
+        document.getElementById(
+          "scannerActions"
+        ).style.display = "block";
+      } catch (error) {
+        scanner = null;
+        scannerActief = false;
+        reader.innerHTML = "";
+
+        alert(
+          "❌ De camera kon niet worden gestart. " +
+          "Sta cameragebruik toe en open de website via HTTPS."
+        );
+      } finally {
+        scanButton.disabled = false;
+      }
+    }
+
+    async function stopScanner() {
+      if (!scanner) {
+        scannerActief = false;
+
+        document.getElementById(
+          "scannerActions"
+        ).style.display = "none";
+
+        return;
+      }
+
+      try {
+        if (scannerActief) {
+          await scanner.stop();
+        }
+      } catch (error) {
+        console.warn(
+          "De QR-scanner kon niet correct worden gestopt.",
+          error
+        );
+      }
+
+      try {
+        scanner.clear();
+      } catch (error) {
+        console.warn(
+          "Het camerabeeld kon niet volledig worden gewist.",
+          error
+        );
+      }
+
+      scanner = null;
+      scannerActief = false;
+
+      document.getElementById("reader").innerHTML = "";
+
+      document.getElementById(
+        "scannerActions"
+      ).style.display = "none";
+    }
+
+    function normaliseerGebruiker(raw) {
+      let user = String(raw || "")
+        .trim()
+        .toLowerCase();
+
+      if (user.includes("login_hint=")) {
+        try {
+          const url = new URL(user);
+
+          user = decodeURIComponent(
+            url.searchParams.get("login_hint") || ""
+          )
+            .trim()
+            .toLowerCase();
+        } catch (error) {
+          const match = user.match(
+            /[?&]login_hint=([^&]+)/i
+          );
+
+          user = match
+            ? decodeURIComponent(match[1])
+                .trim()
+                .toLowerCase()
+            : "";
+        }
+      } else {
+        user = user.replace(/\s/g, "");
+      }
+
+      if (/^\d{6}$/.test(user)) {
+        return (
+          "s" +
+          user +
+          "@" +
+          LEERLING_DOMEIN
+        );
+      }
+
+      if (/^s\d{6}$/.test(user)) {
+        return (
+          user +
+          "@" +
+          LEERLING_DOMEIN
+        );
+      }
+
+      const escapedDomain =
+        LEERLING_DOMEIN.replace(
+          /\./g,
+          "\\."
+        );
+
+      const zonderS = user.match(
+        new RegExp(
+          "^(\\d{6})@" +
+          escapedDomain +
+          "$"
+        )
+      );
+
+      if (zonderS) {
+        return (
+          "s" +
+          zonderS[1] +
+          "@" +
+          LEERLING_DOMEIN
+        );
+      }
+
+      const volledigAdres = new RegExp(
+        "^s\\d{6}@" +
+        escapedDomain +
+        "$"
+      );
+
+      if (volledigAdres.test(user)) {
+        return user;
+      }
+
+      return null;
+    }
+
+    function handleQR(data) {
+      const user = normaliseerGebruiker(data);
+
+      if (!user) {
+        alert(
+          "❌ QR-code niet herkend. " +
+          "Verwacht formaat: s123456@" +
+          LEERLING_DOMEIN
+        );
+
+        return;
+      }
+
+      document.getElementById(
+        "snummer"
+      ).value = user;
+
+      goToTeams(user);
+    }
+
+    function getUserFromInput() {
+      const input = document.getElementById("snummer");
+
+      if (!input.value.trim()) {
+        alert(
+          "⚠️ Typ een S-nummer of scan een QR-code."
+        );
+
+        input.focus();
+
+        return null;
+      }
+
+      const user = normaliseerGebruiker(
+        input.value
+      );
+
+      if (!user) {
+        alert(
+          "⚠️ Ongeldig nummer. Gebruik 123456, " +
+          "s123456 of s123456@" +
+          LEERLING_DOMEIN
+        );
+
+        input.focus();
+        input.select();
+
+        return null;
+      }
+
+      input.value = user;
+
+      return user;
+    }
+
+    function goToTeams(user) {
+      const url =
+        "https://teams.microsoft.com/" +
+        "?login_hint=" +
+        encodeURIComponent(user);
+
+      window.location.href = url;
+    }
+
+    function openApp(app) {
+      const user = getUserFromInput();
+
+      if (!user) {
+        return;
+      }
+
+      const hint = encodeURIComponent(user);
+
+      const urls = {
+        word:
+          "https://www.office.com/launch/word" +
+          "?auth=2&login_hint=" +
+          hint,
+
+        ppt:
+          "https://www.office.com/launch/powerpoint" +
+          "?auth=2&login_hint=" +
+          hint,
+
+        onedrive:
+          "https://www.office.com/launch/onedrive" +
+          "?auth=2&login_hint=" +
+          hint,
+
+        outlook:
+          "https://outlook.office.com/mail/" +
+          "?login_hint=" +
+          hint
+      };
+
+      if (app === "teams") {
+        goToTeams(user);
+        return;
+      }
+
+      if (urls[app]) {
+        window.location.href = urls[app];
+      }
+    }
+
+    function openToolbox(sleutel) {
+      const url = TOOLBOX_LINKS[sleutel];
+
+      if (!isGeldigeUrl(url)) {
+        alert(
+          "⚠️ De link voor Toolbox " +
+          sleutel +
+          " is nog niet correct ingesteld in config.js."
+        );
+
+        return;
+      }
+
+      window.location.href = url.trim();
+    }
+ 
